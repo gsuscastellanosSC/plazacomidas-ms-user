@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService implements CreateUserUseCase {
 
+
     private final UserPersistencePort persistencePort;
     private final UserValidator userValidator;
     private final UserFactory userFactory;
@@ -21,10 +22,19 @@ public class UserService implements CreateUserUseCase {
 
     @Override
     public User createOwner(CreateUserCommand command) {
-        userValidator.validateCreateUser(command);
-        roleService.validateRoleExists(UserConstants.ROLE_OWNER);
+        return createUserWithRole(command, UserConstants.ROLE_OWNER);
+    }
 
-        User user = userFactory.createUser(command, UserConstants.ROLE_OWNER);
+    @Override
+    public User createEmployee(CreateUserCommand command) {
+        return createUserWithRole(command, UserConstants.ROLE_EMPLOYEE);
+    }
+
+    private User createUserWithRole(CreateUserCommand command, String role) {
+        userValidator.validateCreateUser(command);
+        roleService.validateRoleExists(role);
+
+        User user = userFactory.createUser(command, role);
 
         return persistencePort.save(user);
     }

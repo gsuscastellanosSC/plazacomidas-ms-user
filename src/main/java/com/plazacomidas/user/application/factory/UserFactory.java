@@ -5,13 +5,14 @@ import com.plazacomidas.user.domain.model.User;
 import com.plazacomidas.user.domain.util.DateFormatterUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class UserFactory {
 
-    private final BCryptPasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
     public User createUser(CreateUserCommand cmd, String role) {
         return User.builder()

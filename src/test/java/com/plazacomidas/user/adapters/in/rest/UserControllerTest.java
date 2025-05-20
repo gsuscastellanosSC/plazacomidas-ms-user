@@ -1,6 +1,6 @@
 package com.plazacomidas.user.adapters.in.rest;
 
-import com.plazacomidas.user.adapters.in.rest.dto.UserResponseDto;
+import com.plazacomidas.user.adapters.out.rest.dto.UserResponseDto;
 import com.plazacomidas.user.domain.model.CreateUserCommand;
 import com.plazacomidas.user.domain.model.User;
 import com.plazacomidas.user.domain.port.in.CreateUserUseCase;

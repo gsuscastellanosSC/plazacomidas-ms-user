@@ -1,7 +1,7 @@
 package com.plazacomidas.user.adapters.in.rest;
 
 
-import com.plazacomidas.user.adapters.in.rest.dto.UserResponseDto;
+import com.plazacomidas.user.adapters.out.rest.dto.UserResponseDto;
 import com.plazacomidas.user.adapters.in.rest.routes.ApiRoutes;
 import com.plazacomidas.user.documentation.SwaggerUserDescriptions;
 import com.plazacomidas.user.documentation.createowner.ApiResponsesCreateOwner;
@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,14 +29,23 @@ public class UserController {
     @Operation(summary = SwaggerUserDescriptions.CREATE_OWNER)
     @PostMapping(ApiRoutes.OWNER)
     @ApiResponsesCreateOwner
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<User> createOwner(@RequestBody CreateUserCommand command) {
         User created = createUserUseCase.createOwner(command);
+        return ResponseEntity.ok(created);
+    }
+
+    @PostMapping(ApiRoutes.EMPLOYEE)
+    @PreAuthorize("hasRole('PROPIETARIO')")
+    public ResponseEntity<User> createEmployee(@RequestBody CreateUserCommand command) {
+        User created = createUserUseCase.createEmployee(command);
         return ResponseEntity.ok(created);
     }
 
     @Operation(summary = SwaggerUserDescriptions.GET_OWNER)
     @GetMapping(ApiRoutes.OWNER_BY_ID)
     @ApiResponsesGetOwner
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'PROPIETARIO')")
     public ResponseEntity<UserResponseDto> getOwner(@PathVariable Long id) {
         return ResponseEntity.ok(getUserUseCase.getById(id));
     }

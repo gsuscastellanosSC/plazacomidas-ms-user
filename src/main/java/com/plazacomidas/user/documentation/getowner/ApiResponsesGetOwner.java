@@ -1,5 +1,5 @@
 package com.plazacomidas.user.documentation.getowner;
-import com.plazacomidas.user.adapters.in.rest.dto.UserResponseDto;
+import com.plazacomidas.user.adapters.out.rest.dto.UserResponseDto;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
