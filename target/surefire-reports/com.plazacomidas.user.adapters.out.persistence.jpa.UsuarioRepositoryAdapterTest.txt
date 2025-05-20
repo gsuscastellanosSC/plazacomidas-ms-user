@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.plazacomidas.user.adapters.out.persistence.jpa.UsuarioRepositoryAdapterTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in com.plazacomidas.user.adapters.out.persistence.jpa.UsuarioRepositoryAdapterTest
