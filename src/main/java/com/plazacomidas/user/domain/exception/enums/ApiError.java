@@ -6,18 +6,25 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ApiError {
 
-    USUARIO_INVALIDO(
-            "USUARIO_INVALIDO",
+    INVALID_USER(
+            "INVALID_USER",
             HttpStatus.BAD_REQUEST,
-            "Solicitud inválida",
+            "Invalid request",
             "{} | Path: {} | Timestamp: {}"
     ),
 
     SYSTEM_ERROR(
-    "SYSTEM_ERROR",
-    HttpStatus.INTERNAL_SERVER_ERROR,
-    "El sistema no se encuentra disponible, por favor intente más tarde.",
+            "SYSTEM_ERROR",
+            HttpStatus.INTERNAL_SERVER_ERROR,
+            "The system is not available, please try again later.",
             "{} | Path: {} | Timestamp: {}"
+    ),
+
+    RESOURCE_NOT_FOUND(
+            "RESOURCE_NOT_FOUND",
+            HttpStatus.NOT_FOUND,
+            "Resource not found",
+            "[{}] [{}] [{}] Resource not found"
     );
 
     private final String errorCode;

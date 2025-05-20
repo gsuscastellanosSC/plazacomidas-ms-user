@@ -113,11 +113,7 @@
                         <exclude>com/plazacomidas/user/adapters/in/web/handler/*</exclude>
                         <exclude>com/plazacomidas/user/domain/exception/enums/*</exclude>
                         <exclude>com/plazacomidas/user/infrastructure/config/*</exclude>
-                        <exclude>com/plazacomidas/user/application/factory/*</exclude>
-                        <exclude>com/plazacomidas/user/adapters/out/persistence/mapper/*</exclude>
                         <exclude>com/plazacomidas/user/config/*</exclude>
-                        <exclude>com/plazacomidas/user/adapters/out/persistence/*</exclude>
-                        <exclude>com/plazacomidas/user/adapters/out/persistence/helper/*</exclude>
                         <exclude>com/plazacomidas/user/MainApplication*</exclude>
                     </excludes>
                 </configuration>

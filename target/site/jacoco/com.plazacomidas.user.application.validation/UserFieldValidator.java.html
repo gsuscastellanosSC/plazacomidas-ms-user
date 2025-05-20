@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserFieldValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">plazacomidas-ms-user</a> &gt; <a href="index.source.html" class="el_package">com.plazacomidas.user.application.validation</a> &gt; <span class="el_source">UserFieldValidator.java</span></div><h1>UserFieldValidator.java</h1><pre class="source lang-java linenums">package com.plazacomidas.user.application.validation;
+
+import com.plazacomidas.user.domain.exception.InvalidUserException;
+import com.plazacomidas.user.domain.util.DateFormatterUtil;
+import com.plazacomidas.user.domain.util.UserConstants;
+import java.util.function.Predicate;
+
+<span class="fc" id="L8">public enum UserFieldValidator {</span>
+
+<span class="fc" id="L10">    EMAIL(UserConstants.REGEX_EMAIL, UserConstants.ERROR_INVALID_EMAIL),</span>
+<span class="fc" id="L11">    DOCUMENT(UserConstants.REGEX_DOCUMENT, UserConstants.ERROR_INVALID_DOCUMENT),</span>
+<span class="fc" id="L12">    PHONE(UserConstants.REGEX_PHONE, UserConstants.ERROR_INVALID_PHONE),</span>
+<span class="fc" id="L13">    DATE(value -&gt; {</span>
+<span class="fc" id="L14">        DateFormatterUtil.parseDate(value);</span>
+<span class="fc" id="L15">        return true;</span>
+    }, UserConstants.ERROR_INVALID_DATE_FORMAT);
+
+    private final Predicate&lt;String&gt; validator;
+    private final String errorMessage;
+
+    UserFieldValidator(String regex, String errorMessage) {
+<span class="pc bpc" id="L22" title="1 of 4 branches missed.">        this(s -&gt; s != null &amp;&amp; s.matches(regex), errorMessage);</span>
+<span class="fc" id="L23">    }</span>
+
+<span class="fc" id="L25">    UserFieldValidator(Predicate&lt;String&gt; validator, String errorMessage) {</span>
+<span class="fc" id="L26">        this.validator = validator;</span>
+<span class="fc" id="L27">        this.errorMessage = errorMessage;</span>
+<span class="fc" id="L28">    }</span>
+
+    public void validate(String value) {
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (!validator.test(value)) {</span>
+<span class="fc" id="L32">            throw new InvalidUserException(errorMessage);</span>
+        }
+<span class="fc" id="L34">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

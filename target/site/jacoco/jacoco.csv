@@ -1,0 +1,15 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+plazacomidas-ms-user,com.plazacomidas.user.adapters.out.persistence.jpa,UsuarioRepositoryAdapter,0,44,0,0,0,9,0,3,0,3
+plazacomidas-ms-user,com.plazacomidas.user.domain.exception,ResourceNotFoundException,0,4,0,0,0,2,0,1,0,1
+plazacomidas-ms-user,com.plazacomidas.user.domain.exception,InvalidUserException,0,4,0,0,0,2,0,1,0,1
+plazacomidas-ms-user,com.plazacomidas.user.application.factory,UserFactory,30,0,0,0,10,0,1,0,1,0
+plazacomidas-ms-user,com.plazacomidas.user.application.service,UserService,0,19,0,0,0,4,0,1,0,1
+plazacomidas-ms-user,com.plazacomidas.user.application.service,GetUserService,0,23,0,0,0,8,0,1,0,1
+plazacomidas-ms-user,com.plazacomidas.user.application.service,RoleService,0,6,0,0,0,2,0,1,0,1
+plazacomidas-ms-user,com.plazacomidas.user.adapters.out.persistence.jpa.mapper,UserEntityMapper,0,26,0,0,0,10,0,1,0,1
+plazacomidas-ms-user,com.plazacomidas.user.adapters.in.rest,UserController,0,14,0,0,0,3,0,2,0,2
+plazacomidas-ms-user,com.plazacomidas.user.application.mapper,UsuarioMapper,0,29,0,0,0,11,0,1,0,1
+plazacomidas-ms-user,com.plazacomidas.user.application.validation,UserFieldValidator,0,81,1,5,0,16,1,8,0,6
+plazacomidas-ms-user,com.plazacomidas.user.application.validation,UserValidator,0,20,0,0,0,6,0,2,0,2
+plazacomidas-ms-user,com.plazacomidas.user.adapters.out.persistence.jpa.helper,RoleAdapterHelper,0,28,0,0,0,6,0,4,0,4
+plazacomidas-ms-user,com.plazacomidas.user.domain.util,DateFormatterUtil,3,35,0,0,1,10,1,5,1,5
