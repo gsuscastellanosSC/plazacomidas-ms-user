@@ -1,6 +1,9 @@
 package com.plazacomidas.user.adapters.in.rest;
 
 import com.plazacomidas.user.adapters.in.rest.dto.LoginRequestDto;
+import com.plazacomidas.user.adapters.in.rest.routes.ApiRoutes;
+import com.plazacomidas.user.domain.exception.InvalidCredentialsException;
+import com.plazacomidas.user.domain.exception.enums.ApiError;
 import com.plazacomidas.user.infrastructure.security.JwtService.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping(ApiRoutes.LOGIN)
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -37,7 +40,7 @@ public class AuthController {
             return jwtService.generateToken(authenticatedUser);
 
         } catch (AuthenticationException e) {
-            throw new RuntimeException("Credenciales inválidas");
+            throw new InvalidCredentialsException(ApiError.INVALID_CREDENTIALS.getDescription());
         }
     }
 }

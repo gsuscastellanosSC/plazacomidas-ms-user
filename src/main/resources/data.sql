@@ -21,7 +21,7 @@ INSERT INTO usuarios (
 ) VALUES (
              'Pedro', 'Propietario', '10000002', '+573000000002',
              '1985-05-10', 'propietario@plazacomidas.com',
-             '$2a$10$OEQCHSSAr59Qg6OYFRCk6eVmK6zDVLzW28UjEk44eafOZZOqZVZZy', -- propietario123
+             '$2a$10$hKHkTRjEhZPBDuWh2nrtWulNZEyDyp4sbzdwPJBr8jbbxRYPzKgDy', -- propietario123
              1
          );
 

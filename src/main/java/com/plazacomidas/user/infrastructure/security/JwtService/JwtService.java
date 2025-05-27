@@ -1,12 +1,13 @@
 package com.plazacomidas.user.infrastructure.security.JwtService;
 
-import com.plazacomidas.user.domain.model.User;
 import com.plazacomidas.user.domain.spi.IJwtService;
+import com.plazacomidas.user.domain.util.JwtConstants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +34,12 @@ public class JwtService implements IJwtService {
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
 
-        if (userDetails instanceof User user) {
-            claims.put("role", user.getRole());
-        }
+        claims.put(JwtConstants.CLAIM_ROLE, userDetails.getAuthorities()
+                .stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .map(authority -> authority.replace(JwtConstants.ROLE_PREFIX, JwtConstants.ROLE_PREFIX_REPLACEMENT))
+                .orElse(JwtConstants.UNKNOWN_ROLE));
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
@@ -50,6 +54,17 @@ public class JwtService implements IJwtService {
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+    }
+
+    // ✅ Método adicional para validación simple sin UserDetails
+    @Override
+    public boolean isTokenValid(String token, String expectedUsername) {
+        return extractUsername(token).equals(expectedUsername) && !isTokenExpired(token);
+    }
+
+    // ✅ Método adicional para extraer el rol directamente
+    public String extractRole(String token) {
+        return extractClaim(token, claims -> claims.get(JwtConstants.CLAIM_ROLE, String.class));
     }
 
     public String extractUsername(String token) {

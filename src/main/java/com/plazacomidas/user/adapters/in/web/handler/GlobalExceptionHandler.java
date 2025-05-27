@@ -1,11 +1,14 @@
 package com.plazacomidas.user.adapters.in.web.handler;
 
 import com.plazacomidas.user.adapters.in.web.dto.ErrorResponseDto;
+import com.plazacomidas.user.domain.exception.DuplicateEmailException;
+import com.plazacomidas.user.domain.exception.InvalidCredentialsException;
 import com.plazacomidas.user.domain.exception.InvalidUserException;
 import com.plazacomidas.user.domain.exception.ResourceNotFoundException;
 import com.plazacomidas.user.domain.exception.enums.ApiError;
 import com.plazacomidas.user.domain.util.UserConstants;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +19,6 @@ import java.util.List;
 @Log4j2
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
-    private static final List<String> CUSTOM_MESSAGES = List.of(
-            UserConstants.ERROR_INVALID_EMAIL,
-            UserConstants.ERROR_INVALID_DOCUMENT,
-            UserConstants.ERROR_INVALID_PHONE,
-            UserConstants.ERROR_INVALID_DATE_FORMAT,
-            UserConstants.USER_NOT_FOUND
-    );
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDto> handleUnexpectedException(
@@ -40,7 +35,7 @@ public class GlobalExceptionHandler {
         ErrorResponseDto response = ErrorResponseDto.builder()
                 .statusCode(error.getHttpStatus().value())
                 .errorCode(error.getErrorCode())
-                .description(getErrorDescription(ex, error))
+                .description(ex.getMessage())
                 .build();
 
         return ResponseEntity.status(error.getHttpStatus()).body(response);
@@ -61,7 +56,7 @@ public class GlobalExceptionHandler {
         ErrorResponseDto response = ErrorResponseDto.builder()
                 .statusCode(error.getHttpStatus().value())
                 .errorCode(error.getErrorCode())
-                .description(getErrorDescription(ex, error))
+                .description(ex.getMessage())
                 .build();
 
         return ResponseEntity.status(error.getHttpStatus()).body(response);
@@ -82,15 +77,47 @@ public class GlobalExceptionHandler {
         ErrorResponseDto response = ErrorResponseDto.builder()
                 .statusCode(error.getHttpStatus().value())
                 .errorCode(error.getErrorCode())
-                .description(getErrorDescription(ex, error))
+                .description(ex.getMessage())
                 .build();
 
         return ResponseEntity.status(error.getHttpStatus()).body(response);
     }
 
-    private String getErrorDescription(Exception ex, ApiError error) {
-        return CUSTOM_MESSAGES.contains(ex.getMessage())
-                ? ex.getMessage()
-                : error.getDescription();
+    @ExceptionHandler({InvalidCredentialsException.class, AccessDeniedException.class})
+    public ResponseEntity<ErrorResponseDto> handleInvalidCredentialsException(
+            Exception ex,
+            HttpServletRequest request) {
+
+        ApiError error = ApiError.INVALID_CREDENTIALS;
+        ZonedDateTime timestamp = ZonedDateTime.now();
+
+        log.warn(error.getLogFormat(), error.getErrorCode(), request.getRequestURI(), timestamp, ex);
+
+        ErrorResponseDto response = ErrorResponseDto.builder()
+                .statusCode(error.getHttpStatus().value())
+                .errorCode(error.getErrorCode())
+                .description(error.getDescription())
+                .build();
+
+        return new ResponseEntity<>(response, error.getHttpStatus());
+    }
+
+    @ExceptionHandler(DuplicateEmailException.class)
+    public ResponseEntity<ErrorResponseDto> handleDuplicateEmailException(
+            DuplicateEmailException ex,
+            HttpServletRequest request) {
+
+        ApiError error = ApiError.DUPLICATE_EMAIL;
+        ZonedDateTime timestamp = ZonedDateTime.now();
+
+        log.warn(error.getLogFormat(), error.getErrorCode(), request.getRequestURI(), timestamp, ex);
+
+        ErrorResponseDto response = ErrorResponseDto.builder()
+                .statusCode(error.getHttpStatus().value())
+                .errorCode(error.getErrorCode())
+                .description(ex.getMessage()) // Puedes usar error.getDescription() si es fijo
+                .build();
+
+        return new ResponseEntity<>(response, error.getHttpStatus());
     }
 }

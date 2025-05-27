@@ -1,10 +1,21 @@
 package com.plazacomidas.user.domain.exception.enums;
 
+import com.plazacomidas.user.domain.util.AuthConstants;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ApiError {
+
+    DUPLICATE_EMAIL("DUPLICATE_EMAIL", HttpStatus.BAD_REQUEST, "El correo electrónico ya está registrado.",
+            "DUPLICATE_EMAIL | Path: {} | Timestamp: {}"),
+
+    INVALID_CREDENTIALS(
+            "INVALID_CREDENTIALS",
+            HttpStatus.UNAUTHORIZED,
+            AuthConstants.INVALID_CREDENTIALS_MESSAGE,
+            "{} | Path: {} | Timestamp: {}"
+    ),
 
     INVALID_USER(
             "INVALID_USER",
