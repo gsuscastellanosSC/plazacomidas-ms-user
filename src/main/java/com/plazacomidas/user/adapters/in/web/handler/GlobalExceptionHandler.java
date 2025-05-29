@@ -96,7 +96,7 @@ public class GlobalExceptionHandler {
         ErrorResponseDto response = ErrorResponseDto.builder()
                 .statusCode(error.getHttpStatus().value())
                 .errorCode(error.getErrorCode())
-                .description(error.getDescription())
+                .description(ex.getMessage())
                 .build();
 
         return new ResponseEntity<>(response, error.getHttpStatus());
@@ -115,7 +115,7 @@ public class GlobalExceptionHandler {
         ErrorResponseDto response = ErrorResponseDto.builder()
                 .statusCode(error.getHttpStatus().value())
                 .errorCode(error.getErrorCode())
-                .description(ex.getMessage()) // Puedes usar error.getDescription() si es fijo
+                .description(ex.getMessage())
                 .build();
 
         return new ResponseEntity<>(response, error.getHttpStatus());
