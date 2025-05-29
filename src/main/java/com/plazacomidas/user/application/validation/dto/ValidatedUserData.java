@@ -1,11 +1,10 @@
 package com.plazacomidas.user.application.validation.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Builder
+@SuperBuilder
 public class ValidatedUserData {
     private final String email;
     private final String documentId;

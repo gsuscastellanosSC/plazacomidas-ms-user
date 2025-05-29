@@ -7,6 +7,13 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ApiError {
 
+    RESTAURANT_ID_REQUIRED(
+            "RESTAURANT_ID_REQUIRED",
+            HttpStatus.BAD_REQUEST,
+            "El campo id del restaurante es obligatorio para crear un empleado.",
+            "RESTAURANT_ID_REQUIRED | Propietario: {} | Timestamp: {}"
+    ),
+
     DUPLICATE_EMAIL("DUPLICATE_EMAIL", HttpStatus.BAD_REQUEST, "El correo electrónico ya está registrado.",
             "DUPLICATE_EMAIL | Path: {} | Timestamp: {}"),
 

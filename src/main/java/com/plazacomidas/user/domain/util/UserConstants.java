@@ -14,6 +14,7 @@ public final class UserConstants {
     public static final String ERROR_INVALID_PHONE = "El celular es inválido";
     public static final String ERROR_INVALID_DATE_FORMAT = "Formato de fecha inválido.";
     public static final String USER_NOT_FOUND = "Usuario no encontrado";
+    public static final String ERROR_RESTAURANT_ID_REQUIRED = "El id del restaurante es obligatorio y debe ser numérico positivo";
 
     public static final String DATE_FORMAT_DD_MM_YYYY_SLASH = "dd/MM/yyyy";
     public static final String DATE_FORMAT_DD_MM_YYYY_DASH = "dd-MM-yyyy";
@@ -29,6 +30,7 @@ public final class UserConstants {
     public static final String JSON_BIRTH_DATE = "fechaNacimiento";
     public static final String JSON_EMAIL = "correo";
     public static final String JSON_PASSWORD = "clave";
+    public static final String JSON_RESTAURANT_ID = "idRestaurante";
     public static final String JSON_ROLE = "rol";
 
     public static final String COLUMN_FIRST_NAME = "nombre";
@@ -39,4 +41,5 @@ public final class UserConstants {
     public static final String COLUMN_EMAIL = "correo";
     public static final String COLUMN_PASSWORD = "clave";
     public static final String COLUMN_ROLE_ID = "id_rol";
+    public static final String COLUMN_RESTAURANT_ID = "id_restaurantel";
 }

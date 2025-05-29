@@ -13,7 +13,11 @@ public enum UserFieldValidator {
     DATE(value -> {
         DateFormatterUtil.parseDate(value);
         return true;
-    }, UserConstants.ERROR_INVALID_DATE_FORMAT);
+    }, UserConstants.ERROR_INVALID_DATE_FORMAT),
+    RESTAURANT_ID(
+            value -> value != null && value.matches("\\d+") && Long.parseLong(value) > 0,
+            UserConstants.ERROR_RESTAURANT_ID_REQUIRED
+    );
 
     private final Predicate<String> validator;
     private final String errorMessage;

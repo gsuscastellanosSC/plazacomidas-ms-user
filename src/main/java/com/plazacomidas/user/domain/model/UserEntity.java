@@ -46,4 +46,7 @@ public class UserEntity {
 
     @Column(name = UserConstants.COLUMN_ROLE_ID)
     private Long roleId;
+
+    @Column(name = UserConstants.COLUMN_RESTAURANT_ID)
+    private Long restaurantId;
 }

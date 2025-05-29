@@ -36,4 +36,7 @@ public class CreateUserCommand {
 
     @JsonProperty(UserConstants.JSON_PASSWORD)
     private String password;
+
+    @JsonProperty(UserConstants.JSON_RESTAURANT_ID)
+    private Long restaurantId;
 }

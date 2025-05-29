@@ -1,10 +1,13 @@
 package com.plazacomidas.user.application.service;
 
 import com.plazacomidas.user.application.factory.UserFactory;
+import com.plazacomidas.user.application.mapper.ValidatedEmployeeDataMapper;
 import com.plazacomidas.user.application.mapper.ValidatedUserDataMapper;
 import com.plazacomidas.user.application.validation.EmailDuplicationValidator;
+import com.plazacomidas.user.application.validation.EmployeeValidator;
 import com.plazacomidas.user.application.validation.UserValidator;
 import com.plazacomidas.user.application.validation.dto.ValidatedUserData;
+import com.plazacomidas.user.application.validation.dto.ValidatedUserEmployeeData;
 import com.plazacomidas.user.domain.exception.DuplicateEmailException;
 import com.plazacomidas.user.domain.model.CreateUserCommand;
 import com.plazacomidas.user.domain.model.User;
@@ -21,25 +24,36 @@ public class UserService implements CreateUserUseCase {
 
     private final UserPersistencePort persistencePort;
     private final UserValidator userValidator;
+    private final EmployeeValidator employeeValidator;
     private final UserFactory userFactory;
 
     @Override
     public User createOwner(CreateUserCommand command) {
-        return processUserCreation(command, UserConstants.ROLE_OWNER);
+        return processUserCreation(command);
     }
 
     @Override
     public User createEmployee(CreateUserCommand command) {
-        return processUserCreation(command, UserConstants.ROLE_EMPLOYEE);
+        return processEmployeeCreation(command);
     }
 
-    private User processUserCreation(CreateUserCommand command, String role) {
-        validateUserData(command, role);
-        return persistUser(command, role);
+    private User processEmployeeCreation(CreateUserCommand command) {
+        validateEmployeeData(command);
+        return persistUser(command, UserConstants.ROLE_EMPLOYEE);
     }
 
-    private void validateUserData(CreateUserCommand command, String role) {
-        ValidatedUserData validatedData = ValidatedUserDataMapper.fromCommand(command, role);
+    private void validateEmployeeData(CreateUserCommand command) {
+        ValidatedUserEmployeeData validatedData = ValidatedEmployeeDataMapper.fromCommand(command, UserConstants.ROLE_EMPLOYEE);
+        employeeValidator.validateCreateEmployee(validatedData);
+    }
+
+    private User processUserCreation(CreateUserCommand command) {
+        validateUserData(command);
+        return persistUser(command,  UserConstants.ROLE_OWNER);
+    }
+
+    private void validateUserData(CreateUserCommand command) {
+        ValidatedUserData validatedData = ValidatedUserDataMapper.fromCommand(command,  UserConstants.ROLE_OWNER);
         userValidator.validateCreateUser(validatedData);
     }
 
