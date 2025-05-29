@@ -24,3 +24,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+jwt:
+  secret: openssl rand -base64 32
+  expiration: 86400000 # milisegundos (24 horas)
+

@@ -1,10 +1,15 @@
 package com.plazacomidas.user.application.service;
 
 import com.plazacomidas.user.application.factory.UserFactory;
+import com.plazacomidas.user.application.mapper.ValidatedUserDataMapper;
+import com.plazacomidas.user.application.validation.EmailDuplicationValidator;
 import com.plazacomidas.user.application.validation.UserValidator;
+import com.plazacomidas.user.application.validation.dto.ValidatedUserData;
+import com.plazacomidas.user.domain.exception.DuplicateEmailException;
 import com.plazacomidas.user.domain.model.CreateUserCommand;
 import com.plazacomidas.user.domain.model.User;
 import com.plazacomidas.user.domain.port.in.CreateUserUseCase;
+import com.plazacomidas.user.domain.port.out.CurrentUserAccessor;
 import com.plazacomidas.user.domain.port.out.UserPersistencePort;
 import com.plazacomidas.user.domain.util.UserConstants;
 import lombok.RequiredArgsConstructor;
@@ -17,15 +22,29 @@ public class UserService implements CreateUserUseCase {
     private final UserPersistencePort persistencePort;
     private final UserValidator userValidator;
     private final UserFactory userFactory;
-    private final RoleService roleService;
 
     @Override
     public User createOwner(CreateUserCommand command) {
-        userValidator.validateCreateUser(command);
-        roleService.validateRoleExists(UserConstants.ROLE_OWNER);
+        return processUserCreation(command, UserConstants.ROLE_OWNER);
+    }
 
-        User user = userFactory.createUser(command, UserConstants.ROLE_OWNER);
+    @Override
+    public User createEmployee(CreateUserCommand command) {
+        return processUserCreation(command, UserConstants.ROLE_EMPLOYEE);
+    }
 
+    private User processUserCreation(CreateUserCommand command, String role) {
+        validateUserData(command, role);
+        return persistUser(command, role);
+    }
+
+    private void validateUserData(CreateUserCommand command, String role) {
+        ValidatedUserData validatedData = ValidatedUserDataMapper.fromCommand(command, role);
+        userValidator.validateCreateUser(validatedData);
+    }
+
+    private User persistUser(CreateUserCommand command, String role) {
+        User user = userFactory.createUser(command, role);
         return persistencePort.save(user);
     }
 }

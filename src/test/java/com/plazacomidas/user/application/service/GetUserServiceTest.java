@@ -1,6 +1,6 @@
 package com.plazacomidas.user.application.service;
 
-import com.plazacomidas.user.adapters.in.rest.dto.UserResponseDto;
+import com.plazacomidas.user.adapters.out.rest.dto.UserResponseDto;
 import com.plazacomidas.user.domain.model.User;
 import com.plazacomidas.user.domain.port.out.UserPersistencePort;
 import org.junit.jupiter.api.BeforeEach;
