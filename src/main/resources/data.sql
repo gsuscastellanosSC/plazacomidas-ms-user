@@ -17,12 +17,13 @@ INSERT INTO usuarios (
 
 INSERT INTO usuarios (
     nombre, apellido, documento_de_identidad, celular,
-    fecha_nacimiento, correo, clave, id_rol
+    fecha_nacimiento, correo, clave, id_rol, id_restaurante
 ) VALUES (
              'Pedro', 'Propietario', '10000002', '+573000000002',
              '1985-05-10', 'propietario@plazacomidas.com',
              '$2a$10$hKHkTRjEhZPBDuWh2nrtWulNZEyDyp4sbzdwPJBr8jbbxRYPzKgDy', -- propietario123
-             1
+             1,
+          1
          );
 
 INSERT INTO usuarios (

@@ -42,4 +42,7 @@ public class User {
 
     @JsonProperty(UserConstants.JSON_ROLE)
     private String role;
+
+    @JsonProperty(UserConstants.JSON_RESTAURANT_ID)
+    private Long restaurantId;
 }

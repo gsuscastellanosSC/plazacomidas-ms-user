@@ -42,5 +42,5 @@ public final class UserConstants {
     public static final String COLUMN_EMAIL = "correo";
     public static final String COLUMN_PASSWORD = "clave";
     public static final String COLUMN_ROLE_ID = "id_rol";
-    public static final String COLUMN_RESTAURANT_ID = "id_restaurantel";
+    public static final String COLUMN_RESTAURANT_ID = "id_restaurante";
 }

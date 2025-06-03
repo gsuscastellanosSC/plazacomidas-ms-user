@@ -56,7 +56,6 @@ public class UserController {
     @Operation(summary = SwaggerUserDescriptions.GET_OWNER)
     @GetMapping(ApiRoutes.OWNER_BY_ID)
     @ApiResponsesGetOwner
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'PROPIETARIO', 'CLIENTE')")
     public ResponseEntity<UserResponseDto> getOwner(@PathVariable Long id) {
         return ResponseEntity.ok(getUserUseCase.getById(id));
     }

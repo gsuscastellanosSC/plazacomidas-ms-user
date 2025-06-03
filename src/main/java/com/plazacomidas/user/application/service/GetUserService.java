@@ -23,6 +23,7 @@ public class GetUserService implements GetUserUseCase {
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .role(user.getRole())
+                .restaurantId(user.getRestaurantId())
                 .build();
     }
 }

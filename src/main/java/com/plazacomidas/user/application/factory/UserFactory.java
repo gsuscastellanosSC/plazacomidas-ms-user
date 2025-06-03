@@ -24,6 +24,7 @@ public class UserFactory {
                 .email(cmd.getEmail())
                 .password(encoder.encode(cmd.getPassword()))
                 .role(role)
+                .restaurantId(cmd.getRestaurantId())
                 .build();
     }
 }

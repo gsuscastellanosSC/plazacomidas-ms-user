@@ -70,6 +70,6 @@ public class UserService implements CreateUserUseCase {
 
     private User persistUser(CreateUserCommand command, String role) {
         User user = userFactory.createUser(command, role);
-        return persistencePort.save(user);
+        return persistencePort.save(user, role);
     }
 }

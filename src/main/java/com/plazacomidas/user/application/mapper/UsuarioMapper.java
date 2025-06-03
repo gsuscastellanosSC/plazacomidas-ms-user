@@ -18,6 +18,7 @@ public class UsuarioMapper {
                 .email(entity.getEmail())
                 .password(entity.getPassword())
                 .role(nombreRol)
+                .restaurantId(entity.getRestaurantId())
                 .build();
     }
 }

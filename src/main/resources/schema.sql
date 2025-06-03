@@ -14,5 +14,6 @@ CREATE TABLE IF NOT EXISTS usuarios (
     correo VARCHAR(255) UNIQUE NOT NULL,
     clave VARCHAR(255) NOT NULL,
     id_rol BIGINT,
+    id_restaurante BIGINT,
     CONSTRAINT fk_usuario_rol FOREIGN KEY (id_rol) REFERENCES roles(id)
     );
