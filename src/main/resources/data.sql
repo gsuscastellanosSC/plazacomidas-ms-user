@@ -11,7 +11,7 @@ INSERT INTO usuarios (
 ) VALUES (
              'Admin', 'Plaza', '10000001', '+573000000001',
              '1990-01-01', 'admin@plazacomidas.com',
-             '$2a$10$20yjJ6HKbCLBR9FYcLW2nOQfGmAXLn4JLdYqtSxUaeq8c2F3yKce2', -- admin123
+             '$2a$10$kXrmQN9WDmSNIT8T7fOP9.0da/o3Epa3zH6x6Wu3sl7CFoDhTPm2W', -- admin123
              2
          );
 
@@ -33,4 +33,14 @@ INSERT INTO usuarios (
              '2000-08-15', 'empleado@plazacomidas.com',
              '$2a$10$rDUJ0Z5FKULPYp1kpDFJQOmv1r/.xPYXw9cpCNLv.JoXlmjE0Y47C', -- empleado123
              3
+         );
+
+INSERT INTO usuarios (
+    nombre, apellido, documento_de_identidad, celular,
+    fecha_nacimiento, correo, clave, id_rol
+) VALUES (
+             'Carla', 'Cliente', '10000004', '+573000000004',
+             '1995-12-12', 'cliente@plazacomidas.com',
+             '$2a$10$Bv0ruNu1qvhHfOejbyU./eb8V/7O8f5L0W5jBT0C.6uHyfveh1mlK', -- cliente123
+             4
          );

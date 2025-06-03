@@ -8,6 +8,7 @@ public final class UserConstants {
     public static final String ROLE_OWNER = "PROPIETARIO";
     public static final String ROLE_EMPLOYEE = "EMPLEADO";
     public static final String ROLE_ADMIN = "ADMINISTRADOR";
+    public static final String ROLE_CLIENT = "CLIENTE";
 
     public static final String ERROR_INVALID_EMAIL = "Correo inválido";
     public static final String ERROR_INVALID_DOCUMENT = "El documento debe ser numérico";

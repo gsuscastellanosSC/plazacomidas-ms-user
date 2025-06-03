@@ -47,10 +47,16 @@ public class UserController {
         return ResponseEntity.ok(created);
     }
 
+    @PostMapping(ApiRoutes.CLIENT)
+    public ResponseEntity<User> createClient(@RequestBody CreateUserCommand command) {
+        User created = createUserUseCase.createClient(command);
+        return ResponseEntity.ok(created);
+    }
+
     @Operation(summary = SwaggerUserDescriptions.GET_OWNER)
     @GetMapping(ApiRoutes.OWNER_BY_ID)
     @ApiResponsesGetOwner
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'PROPIETARIO')")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'PROPIETARIO', 'CLIENTE')")
     public ResponseEntity<UserResponseDto> getOwner(@PathVariable Long id) {
         return ResponseEntity.ok(getUserUseCase.getById(id));
     }

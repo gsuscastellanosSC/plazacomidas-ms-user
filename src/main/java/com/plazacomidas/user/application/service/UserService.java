@@ -37,6 +37,17 @@ public class UserService implements CreateUserUseCase {
         return processEmployeeCreation(command);
     }
 
+    @Override
+    public User createClient(CreateUserCommand command) {
+        return processClientCreation(command);
+    }
+
+    private User processClientCreation(CreateUserCommand command) {
+        ValidatedUserData validatedData = ValidatedUserDataMapper.fromCommand(command, UserConstants.ROLE_CLIENT);
+        userValidator.validateCreateUser(validatedData);
+        return persistUser(command, UserConstants.ROLE_CLIENT);
+    }
+
     private User processEmployeeCreation(CreateUserCommand command) {
         validateEmployeeData(command);
         return persistUser(command, UserConstants.ROLE_EMPLOYEE);
