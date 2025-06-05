@@ -9,7 +9,7 @@ INSERT INTO usuarios (
     nombre, apellido, documento_de_identidad, celular,
     fecha_nacimiento, correo, clave, id_rol
 ) VALUES (
-             'Admin', 'Plaza', '10000001', '+573000000001',
+             'Admin', 'Plaza', '10000001', '+573057206275',
              '1990-01-01', 'admin@plazacomidas.com',
              '$2a$10$kXrmQN9WDmSNIT8T7fOP9.0da/o3Epa3zH6x6Wu3sl7CFoDhTPm2W', -- admin123
              2
