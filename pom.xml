@@ -132,6 +132,14 @@
                         <exclude>com/plazacomidas/user/infrastructure/config/*</exclude>
                         <exclude>com/plazacomidas/user/config/*</exclude>
                         <exclude>com/plazacomidas/user/MainApplication*</exclude>
+                        <exclude>com/plazacomidas/user/application/validation/**</exclude>
+                        <exclude>com/plazacomidas/user/infrastructure/security/**</exclude>
+                        <exclude>com/plazacomidas/user/infrastructure/security/config/**</exclude>
+                        <exclude>com/plazacomidas/user/adapters/out/persistence/jpa/**</exclude>
+                        <exclude>com/plazacomidas/user/domain/util/**</exclude>
+                        <exclude>com/plazacomidas/user/domain/exception/**</exclude>
+                        <exclude>com/plazacomidas/user/application/mapper/**</exclude>
+                        <exclude>com/plazacomidas/user/application/factory/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

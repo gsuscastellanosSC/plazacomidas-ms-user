@@ -29,3 +29,5 @@ jwt:
   secret: openssl rand -base64 32
   expiration: 86400000 # milisegundos (24 horas)
 
+
+http://localhost:8081/plazacomidas-user/v1/swagger-ui/index.html#/

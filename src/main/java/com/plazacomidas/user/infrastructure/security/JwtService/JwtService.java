@@ -56,13 +56,11 @@ public class JwtService implements IJwtService {
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
-    // ✅ Método adicional para validación simple sin UserDetails
     @Override
     public boolean isTokenValid(String token, String expectedUsername) {
         return extractUsername(token).equals(expectedUsername) && !isTokenExpired(token);
     }
 
-    // ✅ Método adicional para extraer el rol directamente
     public String extractRole(String token) {
         return extractClaim(token, claims -> claims.get(JwtConstants.CLAIM_ROLE, String.class));
     }
